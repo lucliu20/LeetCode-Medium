@@ -31,8 +31,7 @@ class Solution:
             res.append(matrix[i][j])
             visited[i][j] = True
 
-            r, c = dir[to]
-            tmp_r, tmp_c = i + r, j + c
+            tmp_r, tmp_c = i + dir[to][0], j + dir[to][1]
             if (0 <= tmp_r < M) and (0 <= tmp_c < N) and (visited[tmp_r][tmp_c] == False):
                 i, j = tmp_r, tmp_c
             else:
@@ -44,6 +43,6 @@ class Solution:
 solution = Solution()
 print(True if solution.spiralOrder(matrix) in outputs else False)
 
-# Runtime: 28 ms, faster than 84.67% of Python3 online submissions for Spiral Matrix.
-# Memory Usage: 14.4 MB, less than 31.56% of Python3 online submissions for Spiral Matrix.
+# Runtime: 32 ms, faster than 60.84% of Python3 online submissions for Spiral Matrix.
+# Memory Usage: 14.3 MB, less than 62.27% of Python3 online submissions for Spiral Matrix.
 
