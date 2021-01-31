@@ -47,21 +47,43 @@ root.right.left.left = TreeNode(4)
 
 # Refer to LeetCode Solution #1
 import collections
+# class Solution:
+#     def findDuplicateSubtrees(self, root: TreeNode) -> list():
+#         count = collections.Counter()
+#         ans = []
+#         def helper(node):
+#             if not node: return "*"
+#             serial = "{},{},{}".format(node.val, helper(node.left), helper(node.right))
+#             count[serial] += 1
+#             if count[serial] == 2:
+#                 ans.append(node) # We just need to append one of the duplicated subtree root node, any one, just one, not all of them.
+#             return serial
+# 
+#         helper(root)
+#         return ans
+
+# Refer to LeetCode Solution #2
 class Solution:
     def findDuplicateSubtrees(self, root: TreeNode) -> list():
+        trees = collections.defaultdict()
+        """
+        What seems to happen is that when we try to find a key that doesn’t exist in the dictionary 
+        an entry gets created with a value equal to the number of items in the dictionary.
+        https://markhneedham.com/blog/2017/12/01/python-learning-defaultdicts-handling-missing-keys/
+        """
+        trees.default_factory = trees.__len__
         count = collections.Counter()
         ans = []
-        def helper(node):
-            if not node: return "*"
-            serial = "{},{},{}".format(node.val, helper(node.left), helper(node.right))
-            count[serial] += 1
-            if count[serial] == 2:
-                ans.append(node)
-            return serial
+        def lookup(node):
+            if node:
+                uid = trees[node.val, lookup(node.left), lookup(node.right)]
+                count[uid] += 1
+                if count[uid] == 2:
+                    ans.append(node)
+                return uid
 
-        helper(root)
+        lookup(root)
         return ans
-
 
 # Preorder Traversal
 # DFS Iterative
