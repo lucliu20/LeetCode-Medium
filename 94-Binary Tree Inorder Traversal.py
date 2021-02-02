@@ -101,30 +101,50 @@ root.left.right = TreeNode(5)
 # Runtime: 28 ms, faster than 85.54% of Python3 online submissions for Binary Tree Inorder Traversal.
 # Memory Usage: 14.2 MB, less than 49.86% of Python3 online submissions for Binary Tree Inorder Traversal.
 
+
 # Iteratively
+# Approach #1
+# class Solution:
+#     def inorderTraversal(self, root: TreeNode) -> list():
+#         if not root: return None
+#         res = []
+#         stack = [root]
+#         visited = set()
+#         while stack:
+#             tmp = stack[-1]
+#             if tmp.left and tmp.left not in visited:
+#                 stack.append(tmp.left)
+#                 continue
+#             res.append(tmp.val)
+#             visited.add(tmp)
+#             if tmp.right and tmp.right not in visited:
+#                 stack.pop()
+#                 stack.append(tmp.right)
+#                 continue
+#             stack.pop()
+# 
+#         return res
+
+# Runtime: 28 ms, faster than 85.54% of Python3 online submissions for Binary Tree Inorder Traversal.
+# Memory Usage: 14.3 MB, less than 49.86% of Python3 online submissions for Binary Tree Inorder Traversal.
+
+# Iteratively
+# Approach #2
 class Solution:
     def inorderTraversal(self, root: TreeNode) -> list():
         if not root: return None
         res = []
-        stack = [root]
-        visited = set()
-        while stack:
-            tmp = stack[-1]
-            if tmp.left and tmp.left not in visited:
-                stack.append(tmp.left)
-                continue
-            res.append(tmp.val)
-            visited.add(tmp)
-            if tmp.right and tmp.right not in visited:
-                stack.pop()
-                stack.append(tmp.right)
-                continue
-            stack.pop()
+        stack = []
+        curr = root
+        while curr or stack:
+            while curr:
+                stack.append(curr)
+                curr = curr.left
+            curr = stack.pop()
+            res.append(curr.val)
+            curr = curr.right
 
         return res
-
-# Runtime: 28 ms, faster than 85.54% of Python3 online submissions for Binary Tree Inorder Traversal.
-# Memory Usage: 14.3 MB, less than 49.86% of Python3 online submissions for Binary Tree Inorder Traversal.
 
 solution = Solution()
 print(solution.inorderTraversal(root))
