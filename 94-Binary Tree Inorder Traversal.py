@@ -30,11 +30,11 @@ class TreeNode:
         self.left = left
         self.right = right
 
-# root = TreeNode(1)
-# root.left = TreeNode(2)
-# root.right = TreeNode(3)
-# root.left.left = TreeNode(4)
-# root.left.right = TreeNode(5)
+root = TreeNode(1)
+root.left = TreeNode(2)
+root.right = TreeNode(3)
+root.left.left = TreeNode(4)
+root.left.right = TreeNode(5)
 
 # root = TreeNode(1)
 # root.right = TreeNode(2)
@@ -52,15 +52,62 @@ class TreeNode:
 # root = TreeNode(1)
 # root.right = TreeNode(2)
 
+# Explore card Queue&Stack attempt on 01/19/2021
+# class Solution:
+#     def inorderTraversal(self, root: TreeNode) -> list():
+#         if not root: return []
+#         res = []
+#         visited = set()
+#         stack = []
+#         stack.append(root)
+#         # Below while-loop failed on test case #66 as shown above where there are duplicated node values.
+#         # The visisted set should keep track of the visited node references, not the node values.
+#         while stack:
+#             tmp = stack[-1]
+#             if tmp.left and tmp.left not in visited:
+#                 stack.append(tmp.left)
+#                 continue
+#             res.append(tmp.val)
+#             visited.add(tmp)
+#             if tmp.right and tmp.right not in visited:
+#                 stack.pop()
+#                 stack.append(tmp.right)
+#                 continue
+#             stack.pop()
+# 
+#         return res
+
+# Runtime: 28 ms, faster than 83.99% of Python3 online submissions for Binary Tree Inorder Traversal.
+# Memory Usage: 14.3 MB, less than 15.03% of Python3 online submissions for Binary Tree Inorder Traversal.
+
+
+# Explore card Binary Tree attempts on 02/01/2021
+# Recursively
+# class Solution:
+#     def inorderTraversal(self, root: TreeNode) -> list():
+#         def helper(node):
+#             t = []
+#             if not node:
+#                 return [] # if return None, then t.extend(l) would report: "TypeError: 'NoneType' object is not iterable".
+#             l = helper(node.left)
+#             t.extend(l)
+#             t.append(node.val)
+#             r = helper(node.right)
+#             t.extend(r)
+#             return t
+#         
+#         return helper(root)
+
+# Runtime: 28 ms, faster than 85.54% of Python3 online submissions for Binary Tree Inorder Traversal.
+# Memory Usage: 14.2 MB, less than 49.86% of Python3 online submissions for Binary Tree Inorder Traversal.
+
+# Iteratively
 class Solution:
     def inorderTraversal(self, root: TreeNode) -> list():
-        if not root: return []
+        if not root: return None
         res = []
+        stack = [root]
         visited = set()
-        stack = []
-        stack.append(root)
-        # Below while-loop failed on test case #66 as shown above where there are duplicated node values.
-        # The visisted set should keep track of the visited node references, not the node values.
         while stack:
             tmp = stack[-1]
             if tmp.left and tmp.left not in visited:
@@ -76,10 +123,11 @@ class Solution:
 
         return res
 
+# Runtime: 28 ms, faster than 85.54% of Python3 online submissions for Binary Tree Inorder Traversal.
+# Memory Usage: 14.3 MB, less than 49.86% of Python3 online submissions for Binary Tree Inorder Traversal.
+
 solution = Solution()
 print(solution.inorderTraversal(root))
 
-# Runtime: 28 ms, faster than 83.99% of Python3 online submissions for Binary Tree Inorder Traversal.
-# Memory Usage: 14.3 MB, less than 15.03% of Python3 online submissions for Binary Tree Inorder Traversal.
 
 
