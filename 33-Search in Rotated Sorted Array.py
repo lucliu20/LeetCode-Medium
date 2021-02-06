@@ -24,6 +24,7 @@ nums, target = [5,1,2,3,4], 1 # 1
 # Binary Search
 # Using the mid element to compare with the array last element to determine which side (left or right) is linear. 
 # Then decide to move the left indice or the right indice.
+# Time complexity: O(log n)
 class Solution:
     def search(self, nums: list(), target: int) -> int:
         left, right = 0, len(nums)-1
