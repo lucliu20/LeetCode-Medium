@@ -70,13 +70,12 @@ class Solution:
                 self.res[depth] = node.val
             helper(node.left, depth+1)
             helper(node.right, depth+1)
-            return node.val
         
         helper(root, 0)
         return self.res
 
 # Runtime: 24 ms, faster than 97.61% of Python3 online submissions for Binary Tree Right Side View.
-# Memory Usage: 14.1 MB, less than 81.62% of Python3 online submissions for Binary Tree Right Side View.
+# Memory Usage: 14.3 MB, less than 55.20% of Python3 online submissions for Binary Tree Right Side View.
 
 solution = Solution()
 print(solution.rightSideView(root))
