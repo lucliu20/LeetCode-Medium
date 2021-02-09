@@ -23,6 +23,9 @@ nums = [3,4,5,1,2] # 1
 # nums = [1] # 1
 # nums = [3,1,2] # 1
 
+# The idea is from the post:
+# https://leetcode.com/problems/find-peak-element/discuss/788474/General-Binary-Search-Thought-Process-%3A-4-Templates
+
 # The condistion is such that we compare the nums[mid] element with the last element every time. Then we make the array look like below:
 # nums = [4,5,6,7,0,1,2]
 # revised_nums = [T,T,T,T,F,F,F]
