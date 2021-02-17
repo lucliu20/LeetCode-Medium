@@ -55,7 +55,7 @@ class Solution:
         while queue:
             tmp = []
             length = len(queue)
-            for i in range(length):
+            for _ in range(length):
                 curr = queue.popleft()
                 tmp.append(curr.val)
                 queue.extend(curr.children)
