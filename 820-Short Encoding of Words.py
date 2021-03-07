@@ -36,17 +36,13 @@ class Solution:
         res = len(tmp)
         for i in range(1, len(words)):
             if words[i]+"#" not in tmp:
-                if tmp not in words[i]+"#":
-                    res += len(words[i])+1
-                    tmp += (words[i]+"#")
-                else:
-                    res = len(words[i])+1
-                    tmp = (words[i]+"#")
+                res += len(words[i])+1
+                tmp += (words[i]+"#")
         return res
 
 solution = Solution()
 print(solution.minimumLengthEncoding(words))
 
-# Runtime: 244 ms, faster than 24.42% of Python3 online submissions for Short Encoding of Words.
-# Memory Usage: 15 MB, less than 90.12% of Python3 online submissions for Short Encoding of Words.
+# Runtime: 232 ms, faster than 26.16% of Python3 online submissions for Short Encoding of Words.
+# Memory Usage: 14.8 MB, less than 99.42% of Python3 online submissions for Short Encoding of Words.
 
