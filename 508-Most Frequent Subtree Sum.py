@@ -71,11 +71,13 @@ class Solution:
             if value >= mm:
                 mm = value
                 res.append(key)
+            else:
+                break
         return res
 
 solution = Solution()
 print(solution.findFrequentTreeSum(root))
 
-# Runtime: 48 ms, faster than 78.41% of Python3 online submissions for Most Frequent Subtree Sum.
-# Memory Usage: 18.3 MB, less than 7.54% of Python3 online submissions for Most Frequent Subtree Sum.
+# Runtime: 44 ms, faster than 90.58% of Python3 online submissions for Most Frequent Subtree Sum.
+# Memory Usage: 18.2 MB, less than 7.54% of Python3 online submissions for Most Frequent Subtree Sum.
 
