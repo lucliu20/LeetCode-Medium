@@ -24,11 +24,11 @@ Output: 2
 """
 
 # coins, amount = [1,2,5], 11 # 3
-coins, amount = [2], 3 # -1
+# coins, amount = [2], 3 # -1
 # coins, amount = [1], 0 # 0
 # coins, amount = [1], 1 # 1
 # coins, amount = [1], 2 # 2
-# coins, amount = [186,419,83,408], 6249 # 20
+coins, amount = [186,419,83,408], 6249 # 20
 # coins, amount = [4,3,7,8], 9 # 3
 
 
@@ -68,6 +68,7 @@ from typing import List
 class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
         def helper(sublist, target, track):
+            if track >= self.output: return # Added on March/13/2021 to optimize, but it still TLEed0 (58 / 182 test cases passed.)
             if not sublist: return
             for i in range(len(sublist)):
                 q, r = divmod(target, sublist[i])
