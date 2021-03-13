@@ -39,7 +39,7 @@ class Solution:
         arr.sort()
         dp = collections.Counter()
         for i,num in enumerate(arr):
-            dp[num] = 1
+            dp[num] = 1 # start with 1 because we can always have tree with one node.
             for j in range(i):
                 if num % arr[j] == 0:
                     dp[num] += dp[arr[j]] * dp[num/arr[j]]
