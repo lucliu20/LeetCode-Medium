@@ -65,104 +65,125 @@ class ListNode:
 # k = 2
 
 # [80,46,66,35,64]
-# head = ListNode(80)
-# head.next = ListNode(46)
-# head.next.next = ListNode(66)
-# head.next.next.next = ListNode(35)
-# head.next.next.next.next = ListNode(64)
-# k = 1
+head = ListNode(80)
+head.next = ListNode(46)
+head.next.next = ListNode(66)
+head.next.next.next = ListNode(35)
+head.next.next.next.next = ListNode(64)
+k = 1
 
-[100,24,24,36,18,52,95,61,54,88,86,79,11,1,31,26] # [26,24,24,36,18,52,95,61,54,88,86,79,11,1,31,100]
-head = ListNode(100)
-head.next = ListNode(24)
-head.next.next = ListNode(24)
-head.next.next.next = ListNode(36)
-head.next.next.next.next = ListNode(18)
-head.next.next.next.next.next = ListNode(52)
-head.next.next.next.next.next.next = ListNode(95)
-head.next.next.next.next.next.next.next = ListNode(61)
-head.next.next.next.next.next.next.next.next = ListNode(54)
-head.next.next.next.next.next.next.next.next.next = ListNode(88)
-head.next.next.next.next.next.next.next.next.next.next = ListNode(86)
-head.next.next.next.next.next.next.next.next.next.next.next = ListNode(79)
-head.next.next.next.next.next.next.next.next.next.next.next.next = ListNode(11)
-head.next.next.next.next.next.next.next.next.next.next.next.next.next = ListNode(1)
-head.next.next.next.next.next.next.next.next.next.next.next.next.next.next = ListNode(31)
-head.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next = ListNode(26)
-k = 16
+# [100,24,24,36,18,52,95,61,54,88,86,79,11,1,31,26] # [26,24,24,36,18,52,95,61,54,88,86,79,11,1,31,100]
+# head = ListNode(100)
+# head.next = ListNode(24)
+# head.next.next = ListNode(24)
+# head.next.next.next = ListNode(36)
+# head.next.next.next.next = ListNode(18)
+# head.next.next.next.next.next = ListNode(52)
+# head.next.next.next.next.next.next = ListNode(95)
+# head.next.next.next.next.next.next.next = ListNode(61)
+# head.next.next.next.next.next.next.next.next = ListNode(54)
+# head.next.next.next.next.next.next.next.next.next = ListNode(88)
+# head.next.next.next.next.next.next.next.next.next.next = ListNode(86)
+# head.next.next.next.next.next.next.next.next.next.next.next = ListNode(79)
+# head.next.next.next.next.next.next.next.next.next.next.next.next = ListNode(11)
+# head.next.next.next.next.next.next.next.next.next.next.next.next.next = ListNode(1)
+# head.next.next.next.next.next.next.next.next.next.next.next.next.next.next = ListNode(31)
+# head.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next = ListNode(26)
+# k = 16
+
+# The following slution implements swapping the two specific nodes, instead of swapping the node values.
+
+# class Solution:
+#     def swapNodes(self, head: ListNode, k: int) -> ListNode:
+#         ll, diff, foundTail = head, k, False
+#         slow, fast = head, head
+#         slowCount, fastCount = 1, 1
+#         nodeA, nodeB = None, None
+#         preNodeA, preNodeB = None, None
+#         while slow:
+#             while diff >= 0:
+#                 if k == fastCount and not preNodeA:
+#                     preNodeA = fast
+#                     if not nodeA:
+#                         nodeA = fast
+#                 if fast.next:
+#                     if diff-1 == 1 and not preNodeA:
+#                         preNodeA = fast
+#                     fast = fast.next
+#                     fastCount += 1
+#                 else:
+#                     foundTail = True
+#                     if not nodeA:
+#                         nodeA = fast
+#                     break
+#                 diff -= 1
+#                 if diff == 1 and not nodeA:
+#                     nodeA = fast
+#             
+#             if foundTail:
+#                 if slowCount == fastCount-k:
+#                     preNodeB = slow
+#                 if slowCount == fastCount-k+1:
+#                     nodeB = slow
+#                     if not preNodeB:
+#                         preNodeB = slow
+#                     break
+#             else:
+#                 diff = k
+#             slow = slow.next
+#             slowCount += 1
+# 
+#         if nodeA != nodeB and preNodeA == preNodeB:
+#             if nodeB.next == None:
+#                 nodeB.next = nodeA
+#                 nodeA.next = None
+#                 ll = nodeB
+#             else:
+#                 nodeA.next = nodeB
+#                 nodeB.next = None
+#                 ll = nodeA
+#         elif nodeA != nodeB and preNodeA == nodeA:
+#             nodeB.next = nodeA.next
+#             nodeA.next = None
+#             preNodeB.next = nodeA
+#             ll = nodeB
+#         elif nodeA != nodeB and preNodeB == nodeB:
+#             nodeA.next = nodeB.next
+#             nodeB.next = None
+#             preNodeA.next = nodeB
+#             ll = nodeA
+#         elif nodeA != nodeB and preNodeA != preNodeB:
+#             preNodeA.next = nodeB
+#             preNodeB.next = nodeA
+#             nodeA.next, nodeB.next = nodeB.next, nodeA.next
+#         return ll
+
+# Runtime: 1216 ms, faster than 43.61% of Python3 online submissions for Swapping Nodes in a Linked List.
+# Memory Usage: 49 MB, less than 22.69% of Python3 online submissions for Swapping Nodes in a Linked List.
 
 
 class Solution:
     def swapNodes(self, head: ListNode, k: int) -> ListNode:
-        ll, diff, foundTail = head, k, False
         slow, fast = head, head
-        slowCount, fastCount = 1, 1
         nodeA, nodeB = None, None
-        preNodeA, preNodeB = None, None
-        while slow:
-            while diff >= 0:
-                if k == fastCount and not preNodeA:
-                    preNodeA = fast
-                    if not nodeA:
-                        nodeA = fast
-                if fast.next:
-                    if diff-1 == 1 and not preNodeA:
-                        preNodeA = fast
-                    fast = fast.next
-                    fastCount += 1
-                else:
-                    foundTail = True
-                    if not nodeA:
-                        nodeA = fast
-                    break
-                diff -= 1
-                if diff == 1 and not nodeA:
-                    nodeA = fast
-            
-            if foundTail:
-                if slowCount == fastCount-k:
-                    preNodeB = slow
-                if slowCount == fastCount-k+1:
-                    nodeB = slow
-                    if not preNodeB:
-                        preNodeB = slow
-                    break
-                elif fastCount-k == 0:
-                    ll = slow.next
-                    break
-            else:
-                diff = k
-            slow = slow.next
-            slowCount += 1
+        for i in range(k-1):
+            if fast.next:
+                fast = fast.next
+        nodeA = fast
 
-        if nodeA != nodeB and preNodeA == preNodeB:
-            if nodeB.next == None:
-                nodeB.next = nodeA
-                nodeA.next = None
-                ll = nodeB
-            else:
-                nodeA.next = nodeB
-                nodeB.next = None
-                ll = nodeA
-        elif nodeA != nodeB and preNodeA == nodeA:
-            nodeB.next = nodeA.next
-            nodeA.next = None
-            preNodeB.next = nodeA
-            ll = nodeB
-        elif nodeA != nodeB and preNodeB == nodeB:
-            nodeA.next = nodeB.next
-            nodeB.next = None
-            preNodeA.next = nodeB
-            ll = nodeA
-        elif nodeA != nodeB and preNodeA != preNodeB:
-            preNodeA.next = nodeB
-            preNodeB.next = nodeA
-            nodeA.next, nodeB.next = nodeB.next, nodeA.next
-        return ll
+        while fast.next:
+            fast = fast.next
+            slow = slow.next
+        nodeB = slow
+
+        nodeA.val, nodeB.val = nodeB.val, nodeA.val
+        return head
+
+# Runtime: 1032 ms, faster than 91.39% of Python3 online submissions for Swapping Nodes in a Linked List.
+# Memory Usage: 48.8 MB, less than 86.55% of Python3 online submissions for Swapping Nodes in a Linked List.
 
 solution = Solution()
 print(solution.swapNodes(head, k))
 
-# Runtime: 1264 ms, faster than 39.14% of Python3 online submissions for Swapping Nodes in a Linked List.
-# Memory Usage: 49 MB, less than 31.79% of Python3 online submissions for Swapping Nodes in a Linked List.
+
 
