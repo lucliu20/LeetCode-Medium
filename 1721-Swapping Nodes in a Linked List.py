@@ -166,7 +166,7 @@ class Solution:
     def swapNodes(self, head: ListNode, k: int) -> ListNode:
         slow, fast = head, head
         nodeA, nodeB = None, None
-        for i in range(k-1):
+        for _ in range(k-1):
             if fast.next:
                 fast = fast.next
         nodeA = fast
