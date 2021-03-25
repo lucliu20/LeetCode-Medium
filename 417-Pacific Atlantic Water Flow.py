@@ -27,7 +27,6 @@ class Solution:
             if (row, col) in visited:
                 return False
             directions = [(0,1),(1,0),(0,-1),(-1,0)]
-            found = False
             for r, c in directions:
                 tmp_row, tmp_col = row + r, col + c
                 if (tmp_row == len(matrix)) or (tmp_col == len(matrix[0])):
@@ -42,10 +41,9 @@ class Solution:
                         continue
                 if matrix[tmp_row][tmp_col] <= matrix[row][col]:
                     visited.add((row, col))
-                    found = helper(tmp_row, tmp_col, ocean, visited)
-                    if found:
+                    if helper(tmp_row, tmp_col, ocean, visited):
                         return True
-            return found
+            return False
         
         res = []
         for i in range(len(matrix)):
