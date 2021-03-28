@@ -1,4 +1,6 @@
 # https://leetcode.com/problems/evaluate-the-bracket-pairs-of-a-string/
+# My post:
+# https://leetcode.com/problems/evaluate-the-bracket-pairs-of-a-string/discuss/1131851/Python-3-Replacing-the-keys-in-the-string-Intuitive
 
 """
 Example 1:
