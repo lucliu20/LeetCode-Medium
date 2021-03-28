@@ -35,12 +35,13 @@ class Solution:
         init = perm[:]
         cnt = 0
         while True:
-            arr = []
-            for j in range(n):
-                if j%2 == 0:
-                    arr.append(perm[j//2])
-                else:
-                    arr.append(perm[n//2 + (j-1)//2])
+            arr = [perm[j//2] if j%2 == 0 else perm[n//2 + (j-1)//2] for j in range(n)]
+            # arr = []
+            # for j in range(n):
+            #     if j%2 == 0:
+            #         arr.append(perm[j//2])
+            #     else:
+            #         arr.append(perm[n//2 + (j-1)//2])
             perm = arr[:]
             cnt += 1
             if perm == init:
@@ -52,7 +53,7 @@ class Solution:
 solution = Solution()
 print(solution.reinitializePermutation(n))
 
-# Runtime: 644 ms, faster than 100.00% of Python3 online submissions for Minimum Number of Operations to Reinitialize a Permutation.
+# Runtime: 568 ms, faster than 100.00% of Python3 online submissions for Minimum Number of Operations to Reinitialize a Permutation.
 # Memory Usage: 14.4 MB, less than 100.00% of Python3 online submissions for Minimum Number of Operations to Reinitialize a Permutation.
 
 
