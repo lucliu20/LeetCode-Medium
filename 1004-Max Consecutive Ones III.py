@@ -1,4 +1,7 @@
 # https://leetcode.com/problems/max-consecutive-ones-iii/
+# My post:
+# https://leetcode.com/problems/max-consecutive-ones-iii/discuss/1133796/Python-3-Sliding-Window-2-Pointer-Explained
+
 
 """
 Example 1:
