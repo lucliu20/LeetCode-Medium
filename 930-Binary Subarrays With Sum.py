@@ -1,4 +1,7 @@
 # https://leetcode.com/problems/binary-subarrays-with-sum/
+# My post:
+# https://leetcode.com/problems/binary-subarrays-with-sum/discuss/1138190/Python-3-HashTable-Prefix-Sum-Explained-Applies-to-prob-560
+
 
 """
 Example 1:
@@ -28,7 +31,7 @@ A, S = [1,0,1,0,1], 2
 # x = sum[:i-1]
 # So, S = currSum - x
 # x = currSum - S
-# Then we are looking at how many times we see both (currSum == S) and (x) conditions when iterating the array.
+# Then we are searching for how many times we see both (currSum == S) and (x) conditions when iterating the array.
 import collections
 from typing import List
 class Solution:
