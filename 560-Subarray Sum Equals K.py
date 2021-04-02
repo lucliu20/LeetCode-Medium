@@ -1,4 +1,6 @@
 # https://leetcode.com/problems/subarray-sum-equals-k/
+# My post:
+# https://leetcode.com/problems/subarray-sum-equals-k/discuss/1138194/Python-3-HashTable-Prefix-Sum-Applies-to-prob-930
 
 """
 Example 1:
