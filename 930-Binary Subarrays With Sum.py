@@ -78,6 +78,62 @@ class Solution:
 # Memory Usage: 15 MB, less than 91.43% of Python3 online submissions for Binary Subarrays With Sum.
 
 
+"""
+Discussion about the LeetCode solution appoach #2 Prefix Sums
+LeetCode solution:
+class Solution(object):
+    def numSubarraysWithSum(self, A, S):
+        P = [0]
+        for x in A: P.append(P[-1] + x)
+        count = collections.Counter()
+
+        ans = 0
+        for x in P:
+            ans += count[x]
+            count[x + S] += 1
+
+        return ans
+
+
+My question posted:
+For the solution 2, the Python code has P = [0]. Can someone help to elaborate the reason about why to initialize with a zero? 
+I understand w/o this zero, the final result is wrong. But I'm trying to figure out how one can think of this initial zero. 
+And why is it zero, not 1 or -1? What is the thought process here? Thanks.
+
+
+Reply:
+P doesn't have to be initialized as [0]. It depends on whether your prefix sums include the ith element or not. 
+In the solution provided, P[i] is defined as: P[i] = A[0] + A[1] + ... + A[i-1]. If you defined P[i] as A[0] + A[1] + ... + A[i] instead, 
+you will need to initialize P as [1]. It is a matter of taste. 
+The initialization to 0 or 1 is required to address the case where the entire prefix sum is equal to S. 
+Here is a solution that sets P[0] to 1.
+"""
+
+# class Solution(object):
+#     def numSubarraysWithSum(self, A, S):
+#         """
+#         :type A: List[int]
+#         :type S: int
+#         :rtype: int
+#         """
+#         pref = {}
+#         pref[0] = 1
+#         total = 0
+#         ans = 0
+#         
+#         for i in range(len(A)):
+#             total += A[i]
+#             if (total-S) in pref:
+#                 ans += pref[total-S]
+#             if total not in pref:
+#                 pref[total] = 1
+#             else:
+#                 pref[total] += 1
+#                 
+#         return ans
+
+
+
 
 # 26 / 59 test cases passed.
 # Status: Wrong Answer
