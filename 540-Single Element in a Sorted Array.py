@@ -1,4 +1,7 @@
 # https://leetcode.com/problems/single-element-in-a-sorted-array/
+# My post:
+# https://leetcode.com/problems/single-element-in-a-sorted-array/discuss/1157644/Python-3-Binary-search-Intuitive-Easy-understanding-Neat
+
 
 """
 Example 1:
