@@ -29,10 +29,10 @@ class Solution:
         def helper(mid):
             cnt = 0
             for i in range(len(piles)):
-                if piles[i]%mid:
-                    cnt += (piles[i]//mid + 1)
-                else:
-                    cnt += piles[i]//mid
+                # if piles[i]%mid:
+                #     cnt += (piles[i]//mid + 1)
+                # else:
+                cnt += (piles[i]-1) // mid + 1
                 if cnt > h:
                     return True
             return False
@@ -54,6 +54,6 @@ class Solution:
 solution = Solution()
 print(solution.minEatingSpeed(piles, h))
 
-# Runtime: 648 ms, faster than 13.95% of Python3 online submissions for Koko Eating Bananas.
-# Memory Usage: 15.6 MB, less than 20.28% of Python3 online submissions for Koko Eating Bananas.
+# Runtime: 580 ms, faster than 22.51% of Python3 online submissions for Koko Eating Bananas.
+# Memory Usage: 15.6 MB, less than 61.99% of Python3 online submissions for Koko Eating Bananas.
 
