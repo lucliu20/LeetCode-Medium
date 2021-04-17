@@ -42,6 +42,12 @@ points, k = [[3,3],[5,-1],[-2,4]], 2
 
 # Heap
 # Since we need to find the min distances, then we keep track of the min distance points (-(x**2 + y**2)) in the heap
+# Runtime:
+# Inserting an item to a heap of size k take O(logK) time.
+# And we do this for each item points.
+# So runtime is O(N * logK) where N is the length of points.
+
+# Space: O(K) for our heap.
 from typing import List
 import heapq
 class Solution:
