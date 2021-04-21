@@ -17,8 +17,8 @@ Note that different sequences are counted as different combinations.
 Therefore the output is 7.
 """
 
-# nums, target = [1, 2, 3], 4 # Expected: 7
-nums, target = [4,2,1], 32 # Expected: 39882198
+nums, target = [1, 2, 3], 4 # Expected: 7
+# nums, target = [4,2,1], 32 # Expected: 39882198
 
 
 # 9 / 17 test cases passed.
@@ -59,7 +59,12 @@ from typing import List
 
 class Solution:
     def combinationSum4(self, nums: List[int], target: int) -> int:
-        pass
+        dp = [0]*100
+        dp[0] = 1
+        for i in range(target):
+            for x in nums:
+                dp[i+x] += dp[i]
+        return dp
 
 
 
