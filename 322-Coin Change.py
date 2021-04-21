@@ -65,33 +65,63 @@ from typing import List
 # Last executed input:
 # [3,7,405,436]
 # 8839
+# class Solution:
+#     def coinChange(self, coins: List[int], amount: int) -> int:
+#         def helper(sublist, target, track):
+#             if track >= self.output: return # Added on March/13/2021 to optimize, but it still TLEed0 (58 / 182 test cases passed.)
+#             if not sublist: return
+#             for i in range(len(sublist)):
+#                 q, r = divmod(target, sublist[i])
+#                 if r == 0:
+#                     # print("r==0", sublist[i], q)
+#                     self.output = min(self.output, track+q)
+#                     # print("self.output: ", self.output)
+#                     continue
+#                 c = 0
+#                 while c <= q:
+#                     helper(sublist[i+1:], r, track+q-c)
+#                     # print(sublist[i], q-c)
+#                     c += 1
+#                     r += sublist[i]
+#         
+#         if amount == 0:
+#             return 0
+#         self.output = float("inf")
+#         count = 0
+#         coins.sort(reverse=True)
+#         helper(coins, amount, count)
+#         return self.output if self.output != float("inf") else -1
+
+
+# April/20/2021
+# Learning Dynamic Programming
+# Practice
+# Recursively with memoization
+import collections
 class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
-        def helper(sublist, target, track):
-            if track >= self.output: return # Added on March/13/2021 to optimize, but it still TLEed0 (58 / 182 test cases passed.)
-            if not sublist: return
-            for i in range(len(sublist)):
-                q, r = divmod(target, sublist[i])
-                if r == 0:
-                    # print("r==0", sublist[i], q)
-                    self.output = min(self.output, track+q)
-                    # print("self.output: ", self.output)
-                    continue
-                c = 0
-                while c <= q:
-                    helper(sublist[i+1:], r, track+q-c)
-                    # print(sublist[i], q-c)
-                    c += 1
-                    r += sublist[i]
+        def dfs(memo, n):
+            # if memo[n]:
+            #     return memo[n]
+            if n == 0:
+                return 0
+            memo[n] = float("inf")
+            for coin in coins:
+                if n - coin >= 0:
+                    if memo[n - coin]:
+                        memo[n] = min(memo[n], memo[n - coin]+1)
+                    else:
+                        memo[n] = min(memo[n], dfs(memo, n-coin)+1)
+            return memo[n]
         
-        if amount == 0:
-            return 0
-        self.output = float("inf")
-        count = 0
-        coins.sort(reverse=True)
-        helper(coins, amount, count)
-        return self.output if self.output != float("inf") else -1
+        coins.sort(reverse = True)
+        memo = collections.defaultdict(int)
+        tmp = dfs(memo, amount)
+        return tmp if tmp != float("inf") else -1
 
+
+# Runtime: 1996 ms, faster than 13.49% of Python3 online submissions for Coin Change.
+# Memory Usage: 16.4 MB, less than 20.79% of Python3 online submissions for Coin Change.
 
 
 solution = Solution()
