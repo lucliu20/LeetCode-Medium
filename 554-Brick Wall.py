@@ -22,6 +22,7 @@ wall = [[1,2,2,1],
 
 
 # Hash Map + DP
+# It looks like using the Prefix Sum idea
 from typing import List
 import collections
 class Solution:
