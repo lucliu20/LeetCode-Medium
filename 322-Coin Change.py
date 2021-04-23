@@ -1,4 +1,7 @@
 # https://leetcode.com/problems/coin-change/
+# My post:
+# https://leetcode.com/problems/coin-change/discuss/1173137/Python-3-DP-Multiple-Solutions-Recursion-and-iteration-Explained
+
 
 """
 Example 1:
