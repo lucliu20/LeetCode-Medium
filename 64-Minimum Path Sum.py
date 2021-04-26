@@ -15,8 +15,8 @@ Output: 12
 """
 
 
-# grid = [[1,3,1],[1,5,1],[4,2,1]]
-grid = [[1,2,3],[4,5,6]]
+grid = [[1,3,1],[1,5,1],[4,2,1]]
+# grid = [[1,2,3],[4,5,6]]
 # grid = [[1,3,1,2],[1,5,1,3],[4,2,1,4]]
 
 
@@ -48,7 +48,8 @@ class Solution:
     def minPathSum(self, grid: List[List[int]]) -> int:
         def helper(memo, i, j):
             if i == 0 and j == 0:
-                return grid[i][j]
+                memo[i][j] = grid[i][j]
+                return memo[i][j]
             elif memo[i][j] != -1:
                 return memo[i][j]
             elif i-1 in range(len(grid)) and j-1 in range(len(grid[0])):
