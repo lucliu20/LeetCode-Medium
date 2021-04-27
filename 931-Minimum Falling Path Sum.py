@@ -52,8 +52,28 @@ class Solution:
 # DP recursively with memorization
 class Solution:
     def minFallingPathSum(self, matrix: List[List[int]]) -> int:
-        pass
+        def helper(memo, i, j):
+            if i == 0:
+                memo[i][j] = matrix[i][j]
+                return memo[i][j]
+            elif memo[i][j] != float("inf"):
+                return memo[i][j]
+            elif j-1 in range(len(matrix)) and j+1 in range(len(matrix)):
+                memo[i][j] = min(helper(memo, i-1, j-1), helper(memo, i-1, j), helper(memo, i-1, j+1)) + matrix[i][j]
+            elif j-1 not in range(len(matrix)):
+                memo[i][j] = min(helper(memo, i-1, j), helper(memo, i-1, j+1)) + matrix[i][j]
+            elif j+1 not in range(len(matrix)):
+                memo[i][j] = min(helper(memo, i-1, j-1), helper(memo, i-1, j)) + matrix[i][j]
+            return memo[i][j]
 
+        memo = [[float("inf") for _ in range(len(matrix[0]))] for _ in range(len(matrix))]
+        for j in range(len(matrix[0])-1, -1, -1):
+            helper(memo, len(matrix)-1, j)
+        return min(memo[len(matrix[0])-1])
+
+
+# Runtime: 172 ms, faster than 11.19% of Python3 online submissions for Minimum Falling Path Sum.
+# Memory Usage: 15.8 MB, less than 14.49% of Python3 online submissions for Minimum Falling Path Sum.
 
 
 solution = Solution()
