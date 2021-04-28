@@ -12,7 +12,7 @@ Output: 2
 Explanation: 13 = 4 + 9.
 """
 
-n = 1
+n = 15
 
 """
 The root node is n, and we are trying to keep reduce a perfect square number from it each layer. 
@@ -51,9 +51,34 @@ class Solution:
             l = set()
         return res
 
-solution = Solution()
-print(solution.numSquares(n))
 
 # Runtime: 192 ms, faster than 83.87% of Python3 online submissions for Perfect Squares.
 # Memory Usage: 15.1 MB, less than 33.78% of Python3 online submissions for Perfect Squares.
+
+
+# DP
+# Time complexicy: O(n*sqrt(n))
+import math
+class Solution:
+    def numSquares(self, n: int) -> int:
+        perfects = int(math.sqrt(n))
+        dp = [0 for _ in range(n+1)]
+        for i in range(1, n+1):
+            dp[i] = float("inf")
+            for j in range(1, perfects+1):
+                if i >= j*j:
+                    dp[i] = min(dp[i], dp[i-j*j]+1)
+                else:
+                    break
+        return dp[n]
+
+
+# Runtime: 4920 ms, faster than 27.03% of Python3 online submissions for Perfect Squares.
+# Memory Usage: 14.5 MB, less than 46.97% of Python3 online submissions for Perfect Squares.
+
+
+
+solution = Solution()
+print(solution.numSquares(n))
+
 
