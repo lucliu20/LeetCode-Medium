@@ -31,6 +31,7 @@ text1, text2 = "abcde", "ace"
 
 
 # DP iteratively
+# With Push (See problem #494 for Push or Pull way)
 class Solution:
     def longestCommonSubsequence(self, text1: str, text2: str) -> int:
         dp = [[0 for _ in range(len(text1)+1)] for _ in range(len(text2)+1)] # no of row = len(text2)+1; no of col = len(text1)+1
