@@ -36,7 +36,7 @@ class Solution:
 # Top-down Dynamic Programming with Memoization
 # It lines up with the DP bottom-up solution below.
 # Time complexity: O(N*C) where ‘N’ is the number of items and ‘C’ is the knapsack capacity
-# Space complexity: O(N∗C)
+# Space complexity: O(N*C)
 from typing import List
 class Solution:
     def knapsack(self, profits: List[int], weights: List[int], capacity) -> int:
