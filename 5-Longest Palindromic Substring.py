@@ -162,6 +162,44 @@ class Solution:
 # Runtime: 4152 ms, faster than 32.37% of Python3 online submissions for Longest Palindromic Substring.
 # Memory Usage: 22.1 MB, less than 14.35% of Python3 online submissions for Longest Palindromic Substring.
 
+
+# Changed dp = [[0 for _ in range(len(s))] for _ in range(len(s))]
+# to dp = [[0]*len(s) for _ in range(len(s))]
+class Solution:
+    def longestPalindrome(self, s: str) -> str:
+        dp = [[0]*len(s) for _ in range(len(s))]
+        res = [0,0]
+        for j in range(len(s)):
+            dp[0][j] = 1
+
+        for j in range(1, len(s)):
+            if s[j] == s[j-1]:
+                dp[1][j] = 1
+                res[0] = j-1
+                res[1] = j
+                # res = s[j-1]+s[j]
+        
+        for l in range(1, len(s)):
+            i = 0
+            j = l
+            while j < len(s):
+                if s[i] == s[j]:
+                    if dp[j-i+1-1-2][j-1]: # Track back previously computed palindrome
+                        dp[l][j] = 1
+                        # if len(res) < len(s[i:j+1]):
+                        if res[1]-res[0] < j-i:
+                            res[0] = i
+                            res[1] = j
+                            # res = s[i:j+1]
+                i += 1
+                j += 1
+        return s[res[0]:res[1]+1]
+
+
+# Runtime: 8112 ms, faster than 13.41% of Python3 online submissions for Longest Palindromic Substring.
+# Memory Usage: 22 MB, less than 16.85% of Python3 online submissions for Longest Palindromic Substring.
+
+
 solution = Solution()
 print(solution.longestPalindrome(s))
 
