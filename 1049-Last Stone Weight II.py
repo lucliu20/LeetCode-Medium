@@ -27,7 +27,7 @@ stones, expected = [1,1,2,3,5,8,13,21,34,55,89,14,23,37,61,98], 1 # Expected: 1
 # stones, expected = [20,5,4,3,1], 7 # Expected: 7
 
 
-# The below approach is from the April/‎24/2021 weekly contest
+# The below approach doesn't work
 from typing import List
 class Solution:
     def lastStoneWeightII(self, stones: List[int]) -> int:
@@ -43,6 +43,7 @@ class Solution:
 
 
 
+# The below approach doesn't work. @ May/19/2021
 class Solution:
     def lastStoneWeightII(self, stones: List[int]) -> int:
         stones.sort(reverse=True)
