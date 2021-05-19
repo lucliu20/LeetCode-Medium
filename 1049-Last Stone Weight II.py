@@ -20,12 +20,14 @@ Output: 1
 """
 
 
-# stones = [2,7,4,1,8,1]
-# stones = [31,26,33,21,40]
-# stones = [1,2]
-stones = [1,1,2,3,5,8,13,21,34,55,89,14,23,37,61,98] # Expected: 1
+# stones, expected = [2,7,4,1,8,1], 1
+# stones, expected = [31,26,33,21,40], 5
+# stones, expected = [1,2], 1
+stones, expected = [1,1,2,3,5,8,13,21,34,55,89,14,23,37,61,98], 1 # Expected: 1
+# stones, expected = [20,5,4,3,1], 7 # Expected: 7
 
 
+# The below approach is from the April/‎24/2021 weekly contest
 from typing import List
 class Solution:
     def lastStoneWeightII(self, stones: List[int]) -> int:
@@ -41,9 +43,31 @@ class Solution:
 
 
 
+class Solution:
+    def lastStoneWeightII(self, stones: List[int]) -> int:
+        stones.sort(reverse=True)
+        res = float("inf")
+        left, right = 0, sum(stones)
+        for i in range(len(stones)):
+            right -= stones[i]
+            if abs((left + stones[i]) - right) < abs((left - stones[i]) - right):
+                left += stones[i]
+                res = min(res, abs(left - right))
+            elif abs((left + stones[i]) - right) == abs((left - stones[i]) - right):
+                left -= stones[i]
+                res = min(res, abs(left - right))
+            else:
+                left -= stones[i]
+                res = min(res, abs(left - right))
+            if res == 0:
+                return res
+        return res
+
+
+
 
 solution = Solution()
-print(solution.lastStoneWeightII(stones))
+print(expected == solution.lastStoneWeightII(stones))
 
 # 
 
