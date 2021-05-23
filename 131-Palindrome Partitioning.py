@@ -200,15 +200,24 @@ s = "abbab" # [["a","b","b","a","b"],["a","b","bab"],["a","bb","a","b"],["abba",
 # Backtracking
 # Recursively
 # With DP
+# Illustration "bcacb"
+#         "b        cac         b"
+#          |         |          |
+#         begin  palindrome    end
+# the palindrome "cac" is from begin+1 to end-1
+# once this substring is verified it's a good palindrome, then update the dp[begin][end] to true accordingly
 class Solution:
     def partition(self, s: str) -> List[List[str]]:
-        def isValid(begin, end):
-            while begin < end:
-                if s[begin] != s[end]:
-                    return False
-                begin += 1
-                end -= 1
-            return True
+        def isValid(begin, end, dp):
+            # while begin < end:
+            #     if s[begin] != s[end]:
+            #         return False
+            #     begin += 1
+            #     end -= 1
+            if (s[begin] == s[end]) and ((end - begin <= 2) or dp[begin+1][end-1] == True):
+                dp[begin][end] = True
+                return True
+            return False
         
         def foundSolution(idx):
             if idx == len(s):
@@ -221,24 +230,26 @@ class Solution:
         def removing(memo):
             memo.pop()
         
-        def backtrack(start, memo):
+        def backtrack(start, memo, dp):
             if foundSolution(start):
                 candidate = memo.copy()
                 self.res.append(candidate)
                 return
             for i in range(start, len(s)):
-                if isValid(start, i):
+                if isValid(start, i, dp):
                     placing(memo, start, i)
-                    backtrack(i+1, memo)
+                    backtrack(i+1, memo, dp)
                     removing(memo)
 
         self.res = []
         memo = []
-        dp
-        backtrack(0, memo)
+        dp = [[False]*len(s) for _ in range(len(s))]
+        backtrack(0, memo, dp)
         return self.res
 
 
+# Runtime: 700 ms, faster than 22.44% of Python3 online submissions for Palindrome Partitioning.
+# Memory Usage: 30.5 MB, less than 20.09% of Python3 online submissions for Palindrome Partitioning.
 
 
 solution = Solution()
