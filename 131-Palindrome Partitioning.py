@@ -134,10 +134,10 @@ class Solution:
 # Runtime: 972 ms, faster than 5.04% of Python3 online submissions for Palindrome Partitioning.
 # Memory Usage: 34.3 MB, less than 7.20% of Python3 online submissions for Palindrome Partitioning.
 
-# s = abbab # [["a","b","b","a","b"],["a","b","bab"],["a","bb","a","b"],["abba","b"]]
+s = "abbab" # [["a","b","b","a","b"],["a","b","bab"],["a","bb","a","b"],["abba","b"]]
 # s = "abbccbbab"
 # s = "abbccb"
-s = "aaaaa"
+# s = "bcacb"
 
 
 # Backtracking
@@ -145,12 +145,18 @@ s = "aaaaa"
 class Solution:
     def partition(self, s: str) -> List[List[str]]:
         def isValid(begin, end):
-            if end == begin:
-                return True
-            if end - begin == 1 or end - begin == 2:
-                if s[begin] == s[end]:
-                    return True
-            return False
+            # if end == begin:
+            #     return True
+            # if end - begin == 1 or end - begin == 2:
+            #     if s[begin] == s[end]:
+            #         return True
+            # return False
+            while begin < end:
+                if s[begin] != s[end]:
+                    return False
+                begin += 1
+                end -= 1
+            return True
         
         def foundSolution(idx):
             if idx == len(s):
@@ -168,33 +174,69 @@ class Solution:
                 candidate = memo.copy()
                 self.res.append(candidate)
                 return
-            # looking forward
             for i in range(start, len(s)):
                 if isValid(start, i):
                     placing(memo, start, i)
                     backtrack(i+1, memo)
-                    # to cover the case: "bbccbb"
-                    # if memo[]
                     removing(memo)
-            # i, steps = start, 1
-            # i = start
-            # while i < len(s):
-            #     if isValid(start, i):
-            #         placing(memo, start, i)
-            #         # steps = len(memo[-1])
-            #         backtrack(i+1, memo)
-            #         i += 1
-            #         # prePalLen = len(memo[-1])
-            #         removing(memo)
-                # else:
-                #     break
-            # return prePalLen
 
         self.res = []
         memo = []
         backtrack(0, memo)
         return self.res
 
+
+# Runtime: 692 ms, faster than 25.96% of Python3 online submissions for Palindrome Partitioning.
+# Memory Usage: 30.4 MB, less than 41.68% of Python3 online submissions for Palindrome Partitioning.
+
+
+
+s = "abbab" # [["a","b","b","a","b"],["a","b","bab"],["a","bb","a","b"],["abba","b"]]
+# s = "abbccbbab"
+# s = "abbccb"
+# s = "bcacb"
+
+
+# Backtracking
+# Recursively
+# With DP
+class Solution:
+    def partition(self, s: str) -> List[List[str]]:
+        def isValid(begin, end):
+            while begin < end:
+                if s[begin] != s[end]:
+                    return False
+                begin += 1
+                end -= 1
+            return True
+        
+        def foundSolution(idx):
+            if idx == len(s):
+                return True
+            return False
+        
+        def placing(memo, begin, end):
+            memo.append(s[begin:end+1])
+
+        def removing(memo):
+            memo.pop()
+        
+        def backtrack(start, memo):
+            if foundSolution(start):
+                candidate = memo.copy()
+                self.res.append(candidate)
+                return
+            for i in range(start, len(s)):
+                if isValid(start, i):
+                    placing(memo, start, i)
+                    backtrack(i+1, memo)
+                    removing(memo)
+
+        self.res = []
+        memo = []
+        dp
+        backtrack(0, memo)
+        return self.res
 
 
 
