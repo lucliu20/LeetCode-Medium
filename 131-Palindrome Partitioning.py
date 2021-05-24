@@ -252,6 +252,30 @@ class Solution:
 # Memory Usage: 30.5 MB, less than 20.09% of Python3 online submissions for Palindrome Partitioning.
 
 
+
+# Below approach is to pre-build a DP array.
+# See the slide doc 131-Palindrome Partitioning.pptx for more details
+# s = "abbab" # [["a","b","b","a","b"],["a","b","bab"],["a","bb","a","b"],["abba","b"]]
+# s = "abbccbbab"
+# s = "abbccb" # [["a","b","b","c","c","b"],["a","b","b","cc","b"],["a","b","bccb"],["a","bb","c","c","b"],["a","bb","cc","b"]]
+s = "bcacb" # [["b","c","a","c","b"],["b","cac","b"],["bcacb"]]
+
+
+class Solution:
+    def partition(self, s: str) -> List[List[str]]:
+        dp = [[False]*len(s) for _ in range(len(s))]
+        res = []
+        for i in range(len(s)):
+            for j in range(len(s)):
+                if s[i] == s[j]:
+                    dp[i][j] = True
+
+        return res
+
+
+
+
+
 solution = Solution()
 print(solution.partition(s))
 
