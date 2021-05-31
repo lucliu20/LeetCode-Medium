@@ -38,7 +38,6 @@ products, searchWord = ["mobile","mouse","moneypot","monitor","mousepad"], "mous
 # 40 / 41 test cases passed.
 # Status: Time Limit Exceeded
 from typing import List
-import collections
 class Solution:
     def suggestedProducts(self, products: List[str], searchWord: str) -> List[List[str]]:
         res = []
@@ -46,7 +45,7 @@ class Solution:
         # Optimized with the below two lines code, resolved the TLE issue
         mysorted = sorted(products, key = len)
         longest = len(mysorted[-1])
-        word, mydict = "", collections.defaultdict(list)
+        word = ""
         for c in searchWord:
             word += c
             i, j = 0, 0
@@ -63,12 +62,11 @@ class Solution:
                         if len(tmp) >= len(word):
                             break
                     j += 1
-            mydict[word].append(suggested)
             res.append(suggested)
         return res
 
-# Runtime: 576 ms, faster than 21.20% of Python3 online submissions for Search Suggestions System.
-# Memory Usage: 17.4 MB, less than 46.36% of Python3 online submissions for Search Suggestions System.
+# Runtime: 584 ms, faster than 20.98% of Python3 online submissions for Search Suggestions System.
+# Memory Usage: 17.1 MB, less than 73.34% of Python3 online submissions for Search Suggestions System.
 
 
 solution = Solution()
