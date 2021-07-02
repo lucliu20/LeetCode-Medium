@@ -16,6 +16,9 @@ Output: [1,2,3,4]
 # arr, k, x = [1,1,1,10,10,10], 1, 9
 # arr, k, x = [0,0,1,2,3,3,4,7,7,8], 3, 5 # Expected: [3,3,4]
 arr, k, x = [1,3], 1, 2 # Expected: [1]
+# Test case: #62
+arr, k, x = [1,5,10], 1, 4 # Expected: [5]
+
 
 """
 Binary Search to find the location of "x", if not found, use the mid as the location.
