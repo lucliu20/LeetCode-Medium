@@ -46,12 +46,14 @@ target = 113 # Expected: 30
 from typing import List
 class Solution:
     def minimizeTheDifference(self, mat: List[List[int]], target: int) -> int:
+        # If the total is larger or equal to the target, then just return the diff.
         total = 0
         for r in range(len(mat)):
             total += min(mat[r])
         if total >= target:
             return (total - target)
         
+        # Else, find the min using below code
         dp, myset = [], set()
         for j in range(len(mat[0])):
             tmp = abs(target - mat[0][j])
@@ -64,7 +66,7 @@ class Solution:
             row = set(mat[i])
             for j in row:
                 for k in dp[i-1]:
-                    tmp = k - j
+                    tmp = k - j # it may get a negative result
                     if tmp not in myset:
                         myset.add(tmp)
             dp.append(myset)
