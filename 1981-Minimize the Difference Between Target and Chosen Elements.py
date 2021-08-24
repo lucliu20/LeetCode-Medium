@@ -39,10 +39,14 @@ The absolute difference is 1.
 # mat = [[1,3,70],[1,3,70],[1,3,70],[1,3,70],[1,3,70],[1,3,70],[1,3,70],[1,3,70],[1,3,70],[1,3,70],[1,3,70]]
 # target = 113 # Expected: 13
 
+# 80 / 81 test cases passed.
 mat = [[1,3,70],[1,3,70],[1,3,70],[1,3,70],[1,3,70]]
 target = 113 # Expected: 30
 
 
+# The following code got Wrong answer result: 80 / 81 test cases passed.
+# It was passed earlier on the same day Aug/23/2021
+# The correction code is to change the "abs(target - mat[0][j])" to "target - mat[0][j]"
 from typing import List
 class Solution:
     def minimizeTheDifference(self, mat: List[List[int]], target: int) -> int:
@@ -56,7 +60,9 @@ class Solution:
         # Else, find the min using below code
         dp, myset = [], set()
         for j in range(len(mat[0])):
-            tmp = abs(target - mat[0][j])
+            # The correction code part
+            tmp = target - mat[0][j]
+            # tmp = abs(target - mat[0][j])
             if tmp not in myset:
                 myset.add(tmp)
         dp.append(myset)
@@ -77,9 +83,8 @@ class Solution:
         return res
 
 
-# Runtime: 4828 ms, faster than 16.67% of Python3 online submissions for Minimize the Difference Between Target and Chosen Elements.
-# Memory Usage: 26.2 MB, less than 16.67% of Python3 online submissions for Minimize the Difference Between Target and Chosen Elements.
-
+# Runtime: 4816 ms, faster than 67.59% of Python3 online submissions for Minimize the Difference Between Target and Chosen Elements.
+# Memory Usage: 26.2 MB, less than 22.45% of Python3 online submissions for Minimize the Difference Between Target and Chosen Elements.
 
 solution = Solution()
 print(solution.minimizeTheDifference(mat, target))
