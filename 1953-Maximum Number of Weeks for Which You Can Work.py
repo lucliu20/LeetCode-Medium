@@ -33,7 +33,7 @@ Thus, one milestone in project 0 will remain unfinished.
 # milestones = [8] # 1
 # milestones = [5,9] # 11
 # milestones = [1,2,3] # 6
-milestones = [5,2,1] # 7
+# milestones = [5,2,1] # 7
 # milestones = [9,3,6,8,2,1] # 29
 # milestones = [99, 101] # 199
 # milestones = [1,2,3] # 6
@@ -137,8 +137,43 @@ class Solution:
                 res += 1
         return res
 
+
+
+# Attempt Sep/13/2021
+# 52 / 74 test cases passed.
+# Time Limit Exceeded
+class Solution:
+    def numberOfWeeks(self, milestones: List[int]) -> int:
+        res = 0
+        milestones.sort(reverse=True)
+        while len(milestones) > 1:
+            milestones[1] -= 1
+            if milestones[1] == 0:
+                milestones.remove(0)
+            milestones[0] -= 1
+            if milestones[0] == 0:
+                milestones.pop(0)
+            if milestones[1] < milestones[2]:
+                milestones.sort(reverse=True)
+            res += 2
+        if len(milestones) > 0 and milestones[0] > 0:
+            res += 1
+        return res
+
+
+class Solution:
+    def numberOfWeeks(self, milestones: List[int]) -> int:
+        s, m = sum(milestones), max(milestones)
+        if s - m < m:
+            return 2 * (s - m) + 1
+        return s
+
+
+# Runtime: 704 ms, faster than 97.08% of Python3 online submissions for Maximum Number of Weeks for Which You Can Work.
+# Memory Usage: 26.6 MB, less than 60.31% of Python3 online submissions for Maximum Number of Weeks for Which You Can Work.
+
 solutio = Solution()
 print(solutio.numberOfWeeks(milestones))
 
-# for t in range(len(testCases)):
-#     print(solutio.numberOfWeeks(testCases[t]) == expected[t])
+for t in range(len(testCases)):
+    print(solutio.numberOfWeeks(testCases[t]) == expected[t])
